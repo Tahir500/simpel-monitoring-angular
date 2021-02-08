@@ -1,0 +1,74 @@
+<div class="card card-custom gutter-b">
+    <div class="card-header">
+        <div class="card-title">
+        <h3 class="card-label">
+            <ng-container *ngIf="agent">
+                {{ id ? "Edit" : "Add New" }} Agent
+                <span *ngIf="agent && agent.id">'{{ agent.agentName }}'</span>
+            </ng-container>
+        </h3>
+        </div>
+        <div class="card-toolbar">
+            <a type="button" class="btn btn-light" routerLink="/agent-manager">
+                <i class="fa fa-arrow-left"></i>Back
+            </a>
+            <button class="btn btn-secondary ml-2" (click)="reset()">
+                <i class="fa fa-redo"></i>Reset
+            </button>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="mt-5">
+            <form action="#" class="form form-label-right" [formGroup]="formGroup" (ngSubmit)="save()">
+                <div class="form-group row">
+                    <div class="col-lg-4">
+                        <label>Agent Name</label>
+                        <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off" placeholder="Agent Name" name="agentName" [class.is-invalid]="isControlInvalid('agentName')" [class.is-valid]="isControlValid('agentName')" formControlName="agentName" />
+                        <div class="feedback" *ngIf="!isControlTouched('agentName')">Please enter <b>Agent Name</b></div>
+                        <div class="valid-feedback" *ngIf="isControlValid('agentName')">Agent Name was entered correct</div>
+                        <div class="invalid-feedback" *ngIf="controlHasError('required', 'agentName')">Agent Name is required</div>
+                    </div>
+                    <div class="col-lg-4">
+                        <label>URL Entry Point</label>
+                        <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off" placeholder="URL Entry Point" name="urlEntryPoint" [class.is-invalid]="isControlInvalid('urlEntryPoint')" [class.is-valid]="isControlValid('urlEntryPoint')" formControlName="urlEntryPoint" />
+                        <div class="feedback" *ngIf="!isControlTouched('urlEntryPoint')">Please enter <b>URL Entry Point</b></div>
+                        <div class="valid-feedback" *ngIf="isControlValid('urlEntryPoint')">URL Entry Point was entered correct</div>
+                        <div class="invalid-feedback" *ngIf="controlHasError('required', 'urlEntryPoint')">URL Entry Point is required</div>
+                    </div>
+                    <div class="col-lg-4">
+                        <label>Cron Expression</label>
+                        <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off" placeholder="Cron Expression" name="cronExpression" [class.is-invalid]="isControlInvalid('cronExpression')" [class.is-valid]="isControlValid('cronExpression')" formControlName="cronExpression" />
+                        <div class="feedback" *ngIf="!isControlTouched('cronExpression')">Please check the following link to make a cron expression : <a href="https://www.freeformatter.com/cron-expression-generator-quartz.html"><b>Cron Expression Formatter</b></a></div>
+                        <div class="valid-feedback" *ngIf="isControlValid('cronExpression')">Cron Expression was entered correct</div>
+                        <div class="invalid-feedback" *ngIf="controlHasError('required', 'cronExpression')">Cron Expression is required</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Configuration</label>
+                    <textarea name="configuration" class="form-control form-control-solid" autocomplete="off" placeholder="Configuration" [class.is-invalid]="isControlInvalid('configuration')" [class.is-valid]="isControlValid('configuration')" formControlName="configuration"></textarea>
+                    <div class="feedback" *ngIf="!isControlTouched('configuration')">Please enter <b>Configuration</b></div>
+                    <div class="valid-feedback" *ngIf="isControlValid('configuration')">Configuration was entered correct</div>
+                    <div class="invalid-feedback" *ngIf="controlHasError('required', 'configuration')">Configuration is required</div>
+                </div>
+                <div class="form-group">
+                    <label>Agent Param</label>
+                    <textarea name="agentParam" class="form-control form-control-solid" autocomplete="off" placeholder="Example: {'startdate':'2020-06-29', 'enddate':'2020-06-30'} or {'timescale':'30'} The timescale Parameter is in minutes." [class.is-invalid]="isControlInvalid('agentParam')" [class.is-valid]="isControlValid('agentParam')" formControlName="agentParam"></textarea>
+                    <div class="feedback" *ngIf="!isControlTouched('agentParam')">Please input Agent Param with format <b>JSON</b></div>
+                    <div class="valid-feedback" *ngIf="isControlValid('agentParam')">Agent Param was entered correct</div>
+                    <div class="invalid-feedback" *ngIf="controlHasError('required', 'agentParam')">Agent Param is required</div>
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea name="description" class="form-control form-control-solid" autocomplete="off" placeholder="Description" [class.is-invalid]="isControlInvalid('description')" [class.is-valid]="isControlValid('description')" formControlName="description"></textarea>
+                    <div class="feedback" *ngIf="!isControlTouched('description')">Please enter <b>Description</b></div>
+                    <div class="valid-feedback" *ngIf="isControlValid('description')">Description was entered correct</div>
+                    <div class="invalid-feedback" *ngIf="controlHasError('required', 'description')">Description is required</div>
+                </div>
+                <div class="float-right">
+                    <a class="btn btn-default font-weight-bold mr-2" routerLink="/agent-manager">Cancel</a>
+                    <button type="submit" class="btn btn-primary font-weight-bold mr-2" [disabled]="formGroup.invalid">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
